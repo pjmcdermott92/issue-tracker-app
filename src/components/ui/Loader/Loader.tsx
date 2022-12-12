@@ -1,13 +1,19 @@
 import s from './Loader.module.scss';
 
-type LoaderProps = { fullscreen?: boolean };
+type LoaderProps = { fullscreen?: boolean, overlay?: boolean };
 
-const Loader = ({ fullscreen }: LoaderProps) => {
+const Loader = ({ fullscreen, overlay }: LoaderProps) => {
     if (fullscreen) return (
         <div className={s.fullScreenWrapper}>
             <Loading />
         </div>
-    )
+    );
+
+    if (overlay) return (
+        <div className={s.overlayWrapper}>
+            <Loading />
+        </div>
+    );
 
     return <Loading />
 }

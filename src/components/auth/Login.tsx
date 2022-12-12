@@ -1,11 +1,11 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthProvider';
-import { useForm } from '../../hooks/useForm';
 import { loginUser } from '../../services/auth-service';
 import FormControl from '../forms/FormControl/FormControl';
 import FormButton from '../forms/FormButton';
 import Loader from '../ui/Loader/Loader';
+import withPageTitle from '../../hoc/withPageTitle';
 import { IoMailOutline, IoKeyOutline } from 'react-icons/io5';
 import s from './auth.module.scss';
 
@@ -14,60 +14,60 @@ type DemoLoginsProps = { disabled: boolean };
 const Login = () => {
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string>();
-    const {values, onChange, onSubmit, clearValue} = useForm(onLogin, { email: '', password: ''});
     const { getIdentity } = useAuth();
+    const emailRef = useRef<HTMLInputElement>();
+    const passwordRef = useRef<HTMLInputElement>();
 
-    async function onLogin() {
+    const onSubmit = async (e: FormEvent) => {
+        e.preventDefault();
         setLoading(true);
         setError(undefined);
-
         try {
-            const res = await loginUser({ email: values.email, password: values.password });
+            const res = await loginUser({
+                email: emailRef.current!.value,
+                password: passwordRef.current!.value
+            });
+            
             if (!res.success) {
                 setError(res.message);
-                clearValue('password');
             } else {
                 getIdentity();
             }
         } catch (err) {
             
         }
+        passwordRef.current!.value = '';
         setLoading(false);
     }
 
     return (
         <>
         <div className='card rounded p-2'>
-            {loading ? <Loader /> : (
-                <>
-                <h2>Log In</h2>
-                {error && <div className='my-1 alert alert-danger'>Invalid credentials</div>}
-                <p className='my-1'>Enter your email address and password to log in.</p>
-                <form onSubmit={onSubmit} className={s.authForm}>
-                    <FormControl
-                        name='email'
-                        label='Email Address'
-                        type='email'
-                        value={values.email}
-                        onChange={onChange}
-                        icon={IoMailOutline}
-                        autoFocus
-                        required
-                    />
-                    <FormControl
-                        name='password'
-                        label='Password'
-                        type='password'
-                        value={values.password}
-                        onChange={onChange}
-                        icon={IoKeyOutline}
-                        required
-                    />
-                    <FormButton>Log In</FormButton>
-                </form>
-                <p className='mx-1 text-center'><Link to='forgot-password'>Forgot Password?</Link></p>
-                </>
-            )}
+            {loading && <Loader overlay />}
+            <h2>Log In</h2>
+            {error && <div className='my-1 alert alert-danger'>{error}</div>}
+            <p className='my-1'>Enter your email address and password to log in.</p>
+            <form onSubmit={onSubmit} className={s.authForm}>
+                <FormControl
+                    name='email'
+                    label='Email Address'
+                    type='email'
+                    ref={emailRef}
+                    icon={IoMailOutline}
+                    autoFocus
+                    required
+                />
+                <FormControl
+                    name='password'
+                    label='Password'
+                    type='password'
+                    ref={passwordRef}
+                    icon={IoKeyOutline}
+                    required
+                />
+                <FormButton>Log In</FormButton>
+            </form>
+            <p className='mx-1 text-center'><Link to='forgot-password'>Forgot Password?</Link></p>
         </div>
         <DemoLogins disabled={loading} />
         </>
@@ -102,4 +102,4 @@ function DemoLogins({ disabled }: DemoLoginsProps) {
     )
 }
 
-export default Login;
+export default withPageTitle(Login, 'Log In');
