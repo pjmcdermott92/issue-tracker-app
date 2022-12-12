@@ -9,7 +9,7 @@ interface FormControlProps {
     ref?: any
     value?: string | number
     required?: boolean
-    onChange?: () => void
+    onChange?: (e: any) => void
     autoFocus?: boolean
     as?: string,
     icon?: any

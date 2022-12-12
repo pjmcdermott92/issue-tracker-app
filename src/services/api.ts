@@ -32,6 +32,10 @@ async function makeRequest(
             body: body ? JSON.stringify(body) : null,
             credentials: 'include'
         });
+
+        if (!response.ok && response.status >= 500) {
+            throw new Error('An error occurred. Please try again.');
+        }
     
         const res = await response.json();
         return res;

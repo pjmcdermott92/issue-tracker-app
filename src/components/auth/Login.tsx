@@ -1,47 +1,80 @@
-import { useRef } from 'react';
+import { FormEvent, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../../contexts/AuthProvider';
+import { useForm } from '../../hooks/useForm';
+import { loginUser } from '../../services/auth-service';
 import FormControl from '../forms/FormControl/FormControl';
 import FormButton from '../forms/FormButton';
+import Loader from '../ui/Loader/Loader';
 import { IoMailOutline, IoKeyOutline } from 'react-icons/io5';
 import s from './auth.module.scss';
 
+type DemoLoginsProps = { disabled: boolean };
+
 const Login = () => {
-    const emailRef = useRef<HTMLInputElement>();
-    const passwordRef = useRef<HTMLInputElement>();
+    const [loading, setLoading] = useState<boolean>(false);
+    const [error, setError] = useState<string>();
+    const {values, onChange, onSubmit, clearValue} = useForm(onLogin, { email: '', password: ''});
+    const { getIdentity } = useAuth();
+
+    async function onLogin() {
+        setLoading(true);
+        setError(undefined);
+
+        try {
+            const res = await loginUser({ email: values.email, password: values.password });
+            if (!res.success) {
+                setError(res.message);
+                clearValue('password');
+            } else {
+                getIdentity();
+            }
+        } catch (err) {
+            
+        }
+        setLoading(false);
+    }
 
     return (
         <>
         <div className='card rounded p-2'>
-            <h2>Log In</h2>
-            <p className='my-1'>Enter your email address and password to log in.</p>
-            <form className={s.authForm}>
-                <FormControl
-                    name='email'
-                    label='Email Address'
-                    type='email'
-                    ref={emailRef}
-                    icon={IoMailOutline}
-                    autoFocus
-                    required
-                />
-                <FormControl
-                    name='password'
-                    label='Password'
-                    type='password'
-                    ref={passwordRef}
-                    icon={IoKeyOutline}
-                    required
-                />
-                <FormButton>Log In</FormButton>
+            {loading ? <Loader /> : (
+                <>
+                <h2>Log In</h2>
+                {error && <div className='my-1 alert alert-danger'>Invalid credentials</div>}
+                <p className='my-1'>Enter your email address and password to log in.</p>
+                <form onSubmit={onSubmit} className={s.authForm}>
+                    <FormControl
+                        name='email'
+                        label='Email Address'
+                        type='email'
+                        value={values.email}
+                        onChange={onChange}
+                        icon={IoMailOutline}
+                        autoFocus
+                        required
+                    />
+                    <FormControl
+                        name='password'
+                        label='Password'
+                        type='password'
+                        value={values.password}
+                        onChange={onChange}
+                        icon={IoKeyOutline}
+                        required
+                    />
+                    <FormButton>Log In</FormButton>
+                </form>
                 <p className='mx-1 text-center'><Link to='forgot-password'>Forgot Password?</Link></p>
-            </form>
+                </>
+            )}
         </div>
-        <DemoLogins />
+        <DemoLogins disabled={loading} />
         </>
     )
 }
 
-function DemoLogins() {
+function DemoLogins({ disabled }: DemoLoginsProps) {
     const DemoRoles = [
         { name: 'Admin' },
         { name: 'Project Manager' },
@@ -59,6 +92,7 @@ function DemoLogins() {
                     <button
                         key={role.name}
                         className='btn btn-100 btn-outline-light'
+                        disabled={disabled}
                     >
                         Demo {role.name}
                     </button>
