@@ -56,6 +56,8 @@
     &-xl { font-size: clamp(1.8rem, 12vmin, 2.6rem); }
     &-lg { font-size: clamp(1.4rem, 12vmin, 2.1rem); }
     &-md { font-size: clamp(1rem, 12vmin, 1.25rem); }
+
+    &-center { text-align: center; }
 }
 
 // Alerts

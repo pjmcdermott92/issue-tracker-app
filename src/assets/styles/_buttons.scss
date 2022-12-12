@@ -92,4 +92,11 @@
         border-color: $color-dark;
         &:hover, &:focus { @include set-background($color-dark); }
     }
+
+    &.btn-outline-light {
+        background-color: transparent;
+        color: $color-light;
+        border-color: $color-light;
+        &:hover, &:focus { @include set-background($color-light); }
+    }
 }

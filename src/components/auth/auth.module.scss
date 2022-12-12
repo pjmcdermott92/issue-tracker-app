@@ -1,0 +1,44 @@
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--color-dark);
+    color: var(--color-light);
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+}
+
+.appBrand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .25em;
+    font-size: clamp(2.1rem, 12vmin, 3rem);
+}
+
+.authForm {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.demoLoginOptions {
+    width: 100%;
+    margin-top: 1rem;
+    padding: .75rem;
+    text-align: center;
+}
+
+.demoLoginBtns {
+    display: flex;
+    flex-direction: column;
+    gap: .5em;
+}
