@@ -1,0 +1,40 @@
+$color-primary: #1A6EC2;
+$color-success: #28A745;
+$color-danger: #DC3545;
+$color-warning: #FFC108;
+$color-dark: #222;
+$color-light: #CCC;
+
+// LIGHT THEME COLORS:
+$color-light-bg: #F4F1F5;
+$color-light-base: #222;
+$color-light-accent-light: #EFEFEF;
+$color-light-accent-dark: #666;
+
+// DARK THEME COLORS
+$color-dark-bg: #242526;
+$color-dark-base: #CCC;
+$color-dark-accent-light: #3A3B3C;
+$color-dark-accent-dark: #18191A;
+
+:root {
+    --color-primary: #{$color-primary};
+    --color-success: #{$color-success};
+    --color-danger: #{$color-danger};
+    --color-warning: #{$color-warning};
+
+    --color-dark: #{$color-dark};
+    --color-light: #EFEFEF;
+
+    --color-bg: #{$color-light-bg};
+    --color-base: #{$color-light-base};
+    --color-accent-light: #{$color-light-accent-light};
+    --color-accent-dark: #{$color-light-accent-dark};
+}
+
+:root[data-dark-mode=true] {
+    --color-bg: #{$color-dark-bg};
+    --color-base: #{$color-dark-base};
+    --color-accent-light: #{$color-dark-accent-light};
+    --color-accent-dark: #{$color-dark-accent-dark};
+}

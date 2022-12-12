@@ -1,0 +1,95 @@
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: .25rem 1rem;
+    background-color: $color-light;
+    color: $color-dark;
+    font: {
+        size: 1rem;
+        family: inherit;
+    }
+    text-decoration: none !important;
+    cursor: pointer;
+    outline: none;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    transition: 250ms ease-in-out;
+
+    &:not(:last-of-type) { margin-right: .5rem; }
+    &:hover, &:focus { background: darken(#FFF, 10%); }
+
+    &:disabled {
+        opacity: .55;
+        cursor: not-allowed;
+    }
+
+    // Solid Buttons
+    &.btn-primary {
+        @include set-background($color-primary);
+        &:hover, &:focus { background: lighten($color-primary, 10%);}
+    }
+
+    &.btn-success {
+        @include set-background($color-success);
+        &:hover, &:focus { background: lighten($color-success, 10%);}
+    }
+
+    &.btn-danger {
+        @include set-background($color-danger);
+        &:hover, &:focus { background: lighten($color-danger, 10%);}
+    }
+
+    &.btn-warning {
+        @include set-background($color-warning);
+        &:hover, &:focus { background: lighten($color-warning, 10%);}
+    }
+
+    &.btn-dark {
+        @include set-background($color-dark);
+        &:hover, &:focus { background: lighten($color-dark, 10%);}
+    }
+
+    // Sizing
+    &.btn-100 {
+        width: 100%;
+        padding-top: .5rem;
+        padding-bottom: .5rem;
+    }
+
+    // Outline Buttons
+    &.btn-outline-primary {
+        background-color: transparent;
+        color: $color-primary;
+        border-color: $color-primary;
+        &:hover, &:focus { @include set-background($color-primary); }
+    }
+
+    &.btn-outline-success {
+        background-color: transparent;
+        color: $color-success;
+        border-color: $color-success;
+        &:hover, &:focus { @include set-background($color-success); }
+    }
+
+    &.btn-outline-danger {
+        background-color: transparent;
+        color: $color-danger;
+        border-color: $color-danger;
+        &:hover, &:focus { @include set-background($color-danger); }
+    }
+
+    &.btn-outline-warning {
+        background-color: transparent;
+        color: $color-warning;
+        border-color: $color-warning;
+        &:hover, &:focus { @include set-background($color-warning); }
+    }
+
+    &.btn-outline-dark {
+        background-color: transparent;
+        color: $color-dark;
+        border-color: $color-dark;
+        &:hover, &:focus { @include set-background($color-dark); }
+    }
+}

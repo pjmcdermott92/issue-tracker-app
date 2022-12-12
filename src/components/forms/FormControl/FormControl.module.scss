@@ -1,0 +1,52 @@
+.formControl {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin: .5rem 0;
+    padding: .05rem;
+
+    input {
+        width: 100%;
+        margin: 0 .25rem;
+        padding: .25rem;
+        background: none;
+        border: none;
+        border-bottom: 1px solid #CCC;
+        outline: none;
+        font: inherit;
+        font-size: 1.1rem;
+
+        &:focus, &:active {
+            border-color: #222;
+        }
+    }
+
+    textarea {
+        width: 100%;
+        margin: 0 .25rem;
+        padding: .25rem;
+        background: none;
+        border: 1px solid #CCC;
+        border-radius: .15rem;
+        outline: none;
+        font: inherit;
+        font-size: 1.1rem;
+
+        &:focus, &:active {
+            border-color: #222;
+        }
+    }
+}
+
+.passwordToggleBtn {
+    position: absolute;
+    right: .5em;
+    bottom: .5em;
+    cursor: pointer;
+    transition: 250ms ease-in-out;
+    z-index: 500;
+
+    &:hover {
+        transform: scale(1.5);
+    }
+}

@@ -1,0 +1,150 @@
+.wrapper {
+    padding-left: 250px;
+    transition: 350ms ease-in-out;
+
+    &.expanded { padding-left: 0; }
+}
+
+.sr-only {
+    visibility: hidden;
+    position: absolute;
+    top: -1000%;
+    left: -1000%;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+
+    thead {
+        text-align: left;
+        font-size: .85rem;
+    }
+
+    tbody {
+        font-size: .9rem;
+
+        tr {
+            &:hover { background-color: var(--color-medium); }
+        }
+    }
+
+    th, td { border-bottom: 1px solid #DDD; }
+    th { padding: .25rem 1rem; }
+    td { padding: 1rem;  }
+}
+
+// Background Colors
+.bg {
+    &-primary { @include set-background($color-primary); }
+    &-success { @include set-background($color-success); }
+    &-danger { @include set-background($color-danger); }
+    &-warning { @include set-background($color-warning); }
+    &-dark { @include set-background($color-dark); }
+    &-light { @include set-background($color-light); }
+}
+
+// Text Styles
+.text {
+    &-primary { color: $color-primary; }
+    &-success { color: $color-success; }
+    &-danger { color: $color-danger; }
+    &-warning { color: $color-warning; }
+    &-dark { color: var(--color-base); }
+    &-muted { opacity: .65; }
+
+    &-xl { font-size: clamp(1.8rem, 12vmin, 2.6rem); }
+    &-lg { font-size: clamp(1.4rem, 12vmin, 2.1rem); }
+    &-md { font-size: clamp(1rem, 12vmin, 1.25rem); }
+}
+
+// Alerts
+.alert {
+    position: relative;
+    margin: 0 .25rem;
+    padding: .75rem;
+    color: var(--color-base);
+    border: 1px solid;
+    border-left: 8px solid;
+
+    &-primary {
+        @include lighten-background($color-primary);
+        border-color: $color-primary;
+    }
+    &-success {
+        @include lighten-background($color-success);
+        border-color: $color-success;
+    }
+    &-warning {
+        @include lighten-background($color-warning);
+        border-color: $color-warning;
+    }
+    &-danger {
+        @include lighten-background($color-danger);
+        border-color: $color-danger;
+    }
+    &-default {
+        @include lighten-background($color-light);
+        border-color: $color-dark;
+    }
+
+    &.closing {
+        animation: closeAlert 500ms ease forwards;
+    }
+}
+
+@keyframes closeAlert {
+    0% { transform: scale(1); }
+    100% { transform: scale(.8); }
+}
+
+// Badges
+.badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: .05rem .55rem;
+    font-size: .9rem;
+    text-align: center;
+    margin: 0 .15rem;
+    background-color: var(--color-light);
+    color: var(--color-base);
+    border: 1px solid #FFF;
+    border-radius: 8px;
+
+    &.primary { @include set-background($color-primary); }
+    &.success { @include set-background($color-success); }
+    &.danger { @include set-background($color-danger); }
+    &.warning { @include set-background($color-warning); }
+    &.dark { @include set-background($color-dark); }
+    &.light { @include set-background($color-light); }
+}
+
+// Card
+.card {
+    width: 100%;
+    margin: .1rem;
+    background-color: #FFF;
+    color: var(--color-base);
+    border: 1px solid #CCC;
+
+    &__header {
+        position: relative;
+        padding: .5rem;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+
+    &__title {
+        font-size: 1.4rem;
+    }
+
+    &__body {
+        padding: .5rem;
+    }
+
+    &__footer {
+        margin-top: .15rem;
+        padding: .5rem;
+        border-top: 1px solid rgba(0,0,0,0.05);
+    }
+}

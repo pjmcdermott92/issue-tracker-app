@@ -1,0 +1,27 @@
+.alertWrapper {
+    position: absolute;
+    top: 5rem;
+    left: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    gap: .5rem;
+    width: 100%;
+    max-width: 750px;
+    padding: 1rem;
+    transform: translateX(-50%);
+    z-index: 1000;
+}
+
+.alertCloseBtn {
+    position: absolute;
+    right: .5rem;
+    border: none;
+    background: none;
+    font-size: 1.25rem;
+    opacity: .5;
+    outline: none;
+    cursor: pointer;
+    transform: scale(1.8);
+}
