@@ -1,4 +1,4 @@
-import { FormEvent, useState, useRef, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, Navigate, useSearchParams } from 'react-router-dom';
 import { resetPassword, verifyResetToken } from '../../services/auth-service';
 import CreatePasswordForm from './CreatePasswordForm';
@@ -40,9 +40,8 @@ function ResetPasswordForm({ token }: ResetPasswordFormProps) {
         if (!res.success) {
             if (res.status >= 500) setError(res.message);
         } else {
-
+            setIsReset(true);
         }
-        setIsReset(true);
         setLoading(false);
     }
 
@@ -68,9 +67,7 @@ function InvalidTokenMessage({ setPageTitle }: ResetPasswordProps) {
     useEffect(() => setPageTitle('Link Invalid or Expired'), []);
     return (
         <>
-        <h4 className='text-danger mb-1 text-center'>
-            Link Invalid or Expired
-        </h4>
+        <h4 className='text-danger mb-1 text-center'>Link Invalid or Expired</h4>
         <p className='mt-1'>Your password reset link is either invalid or has expired.</p>
         <p className='my-1'>If you need to reset your password, please <Link to='/login/forgot-password'>request a new link</Link>.</p>
         </>

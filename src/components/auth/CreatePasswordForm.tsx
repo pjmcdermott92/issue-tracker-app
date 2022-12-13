@@ -1,4 +1,5 @@
 import { useState, useEffect, FormEvent } from 'react';
+import { useToggle } from '../../hooks/useToggle';
 import { IoKeyOutline, IoCheckmark, IoAlert } from 'react-icons/io5';
 import FormControl from '../forms/FormControl/FormControl';
 import FormButton from '../forms/FormButton';
@@ -8,10 +9,10 @@ type CreatePasswordFormProps = { handleSubmit: any };
 type PasswordChecklistProps = { password: string, setIsValid: any };
 
 const CreatePasswordForm = ({ handleSubmit }: CreatePasswordFormProps) => {
-    const [showPasswordChecklist, setShowPasswordChecklist] = useState<boolean>(true);
+    const [showPasswordChecklist, togglePasswordChecklist] = useToggle(true);
     const [password, setPassword] = useState<string>('');
     const [confirmPassword, setConfirmPassword] = useState<string>('');
-    const [passwordValid, setPasswordValid] = useState<boolean>(false);
+    const [passwordValid, togglePasswordValid] = useToggle(false);
     const passwordsMatch = passwordValid && password === confirmPassword;    
 
     const onSubmit = (e: FormEvent) => {
@@ -28,8 +29,8 @@ const CreatePasswordForm = ({ handleSubmit }: CreatePasswordFormProps) => {
                 label='Create Password'
                 value={password}
                 icon={IoKeyOutline}
-                onBlur={() => setShowPasswordChecklist(() => passwordValid ? false : true)}
-                onFocus={() => setShowPasswordChecklist(true)}
+                onBlur={() => togglePasswordChecklist(!passwordValid)}
+                onFocus={() => togglePasswordChecklist(true)}
                 onChange={(e: any) => setPassword(e.target!.value)}
                 required
                 autoFocus
@@ -37,7 +38,7 @@ const CreatePasswordForm = ({ handleSubmit }: CreatePasswordFormProps) => {
             { showPasswordChecklist && 
                 <PasswordChecklist
                     password={password}
-                    setIsValid={setPasswordValid}
+                    setIsValid={togglePasswordValid}
                 />
             }
             <FormControl
@@ -57,7 +58,11 @@ const CreatePasswordForm = ({ handleSubmit }: CreatePasswordFormProps) => {
                     </li>
                 </ul>
             )}
-            <FormButton disabled={!passwordValid || !passwordsMatch}>Create Password</FormButton>
+            <FormButton
+                disabled={!passwordValid || !passwordsMatch}
+            >
+                Create Password
+            </FormButton>
         </form>
     );
 }

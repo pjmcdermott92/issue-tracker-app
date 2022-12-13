@@ -1,13 +1,15 @@
 import { Suspense } from 'react';
-import { Navigate, Outlet } from 'react-router-dom';
+import { Navigate, useLocation, Outlet } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthProvider';
 import { IoBug } from 'react-icons/io5';
 import Loader from '../ui/Loader/Loader';
 import s from './auth.module.scss';
 
 const AuthLayout = () => {
-    const { isLoggedIn } = useAuth();
-    if (isLoggedIn) return <Navigate to='/' />
+    const { state } = useLocation();
+    const { isLoggedIn, currentUser } = useAuth();
+    const redirectUrl = state?.url ? state.url : '/'; 
+    if (isLoggedIn) return <Navigate to={redirectUrl} state={{ auth: { display_name: currentUser?.display_name } }} replace />
 
     return (
         <Suspense fallback={<Loader fullscreen />}>
@@ -23,7 +25,7 @@ const AuthLayout = () => {
                 </div>
             </div>
         </Suspense>
-    )
+    );
 }
 
 export default AuthLayout;

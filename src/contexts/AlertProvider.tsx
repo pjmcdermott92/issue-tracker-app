@@ -1,4 +1,6 @@
 import React, { useContext, useState, createRef, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import { ToastAlerts } from '../components/ui/ToastAlerts/ToastAlerts';
 
 export type Alert = { id: string, message: string, type: string };
 type AlertProviderProps = { children: React.ReactNode };
@@ -14,6 +16,7 @@ export const useAlerts = () => {
 
 const AlertProvider = ({ children }: AlertProviderProps) => {
     const [alerts, setAlerts] = useState<Alert[]>([]);
+    const { state } = useLocation();
     const alertWrapperRef = createRef<any>();
 
     const setAlert = (message: string, type: string = 'dark') => {
@@ -29,8 +32,27 @@ const AlertProvider = ({ children }: AlertProviderProps) => {
         }, 300);
     }
 
+    useEffect(() => {
+        if (state?.auth?.display_name) setAlert(`Welcome back, ${state.auth.display_name}!`);
+    }, []);
+
+    useEffect(() => {
+        let interval: any;
+        if (!alerts.length) return clearInterval(interval);
+        const alertIndex: number = alerts.length - 1;
+        interval = setInterval(() => {
+            dismissAlert(alerts[alertIndex].id, alertIndex);
+        }, 2000);
+
+        return () => clearInterval(interval);
+    }, [alerts]);
+
     const value = { alerts, setAlert, dismissAlert };
     return <AlertContext.Provider value={value}>
+        <ToastAlerts
+            ref={alertWrapperRef}
+            alertContext={{alerts, dismissAlert}}
+        />
         {children}
     </AlertContext.Provider>
 }

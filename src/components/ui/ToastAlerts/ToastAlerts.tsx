@@ -15,7 +15,13 @@ export const ToastAlerts = forwardRef(({ alertContext }: ToastAlertsProps, ref: 
             {
                 alerts?.map((alert: Alert, index: number) => {
                     return (
-                        <div key={alert.id} className={`alert alert-${alert.type} rounded`}>
+                        <div
+                            key={alert.id}
+                            className={`alert alert-${alert.type} rounded`}
+                            style={{
+                                boxShadow: '2px 2px 4px 2px rgba(0,0,0,0.15)' 
+                            }}
+                        >
                             <button
                                 className={s.alertCloseBtn}
                                 onClick={() => dismissAlert(alert.id, index)}
