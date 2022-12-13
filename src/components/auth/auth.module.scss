@@ -42,3 +42,37 @@
     flex-direction: column;
     gap: .5em;
 }
+
+.passwordChecklist {
+    list-style: none;
+    margin: .25rem .5rem;
+
+    li {
+        --color: var(--color-danger);
+        display: flex;
+        gap: .25rem;
+        padding: .25rem;
+        color: var(--color);
+
+        div {
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            color: var(--color);
+            border: 2px solid var(--color);
+            border-radius: 100%;
+        }
+
+        &.valid {
+            --color: var(--color-success);
+            
+            div {
+                background-color: var(--color);
+                color: #FFF;
+            }
+        }
+    }
+}

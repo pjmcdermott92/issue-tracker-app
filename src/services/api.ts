@@ -38,7 +38,7 @@ async function makeRequest(
         }
     
         const res = await response.json();
-        return res;
+        return { ...res, status: response.status };
     } catch (err: any) {
         //@TODO: Handle errors in Fetch
     }

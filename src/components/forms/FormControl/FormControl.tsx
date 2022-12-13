@@ -10,6 +10,8 @@ interface FormControlProps {
     value?: string | number
     required?: boolean
     onChange?: (e: any) => void
+    onFocus?: () => void
+    onBlur?: () => void
     autoFocus?: boolean
     as?: string,
     icon?: any
