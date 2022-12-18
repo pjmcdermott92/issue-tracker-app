@@ -8,9 +8,10 @@ import s from './auth.module.scss';
 const AuthLayout = () => {
     const { state } = useLocation();
     const { isLoggedIn, currentUser } = useAuth();
-    const redirectUrl = state?.url ? state.url : '/'; 
+    const redirectUrl = state?.redirectUrl ? state.redirectUrl : '/'; 
+    
     if (isLoggedIn) return <Navigate to={redirectUrl} state={{ auth: { display_name: currentUser?.display_name } }} replace />
-
+    
     return (
         <Suspense fallback={<Loader fullscreen />}>
             <div className={s.wrapper}>

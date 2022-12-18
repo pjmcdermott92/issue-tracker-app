@@ -42,6 +42,7 @@
     &-warning { @include set-background($color-warning); }
     &-dark { @include set-background($color-dark); }
     &-light { @include set-background($color-light); }
+    &-white { @include set-background(#FFF); }
 }
 
 // Text Styles

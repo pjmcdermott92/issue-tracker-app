@@ -1,0 +1,26 @@
+.header {
+    --header-left: 50px;
+    position: fixed;
+    top: 0;
+    left: var(--header-left);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: calc(100vw - var(--header-left));
+    height: 4rem;
+    padding: 1rem;
+    border-bottom: 1px solid #CCC;
+    transition: 300ms ease-in-out;
+
+    button {
+        margin: 0;
+        padding: .5rem;
+        background-color: var(--color-light);
+        line-height: 1;
+        font-size: 1.1rem;
+    }
+}
+
+.expanded {
+    --header-left: 250px;
+}

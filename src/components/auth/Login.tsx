@@ -1,5 +1,5 @@
 import { FormEvent, useState, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthProvider';
 import { loginUser } from '../../services/auth-service';
 import FormControl from '../forms/FormControl/FormControl';
@@ -30,6 +30,7 @@ const Login = () => {
             
             if (!res.success) {
                 setError(res.message);
+                setLoading(false);
             } else {
                 getIdentity();
             }
@@ -37,7 +38,6 @@ const Login = () => {
             
         }
         passwordRef.current!.value = '';
-        setLoading(false);
     }
 
     return (

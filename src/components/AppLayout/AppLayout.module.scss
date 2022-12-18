@@ -1,0 +1,13 @@
+.wrapper {
+    --left-padding: 50px;
+    display: flex;
+    width: 100vw;
+    min-height: calc(100vh - 4.5rem);
+    padding-left: var(--left-padding);
+    padding-top: 4rem;
+    transition: 300ms ease-in-out;
+}
+
+.expanded {
+    --left-padding: 250px;
+}

@@ -1,0 +1,17 @@
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 250px;
+    height: 100%;
+    background-color: var(--color-dark);
+    color: var(--color-light);
+    overflow: hidden;
+    white-space: nowrap;
+    transition: 300ms ease-in-out;
+}
+
+.hide { width: 50px; }
