@@ -1,13 +1,11 @@
-.wrapper {
-    --left-padding: 50px;
+.pageWrapper {
+    position: relative;
     display: flex;
+    align-items: stretch;
     width: 100vw;
-    min-height: calc(100vh - 4.5rem);
-    padding-left: var(--left-padding);
-    padding-top: 4rem;
-    transition: 300ms ease-in-out;
+    height: 100vh;
 }
 
-.expanded {
-    --left-padding: 250px;
+.container {
+    flex: 1;
 }

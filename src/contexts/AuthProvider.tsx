@@ -8,7 +8,7 @@ export interface User {
     last_name: string,
     display_name: string,
     email: string,
-    roles: string[]
+    permissions: string[]
 }
 
 type AuthProviderProps = { children: React.ReactNode };

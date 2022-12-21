@@ -1,0 +1,75 @@
+.dashboardSectionTop {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 1rem;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+        text-align: center;
+
+        & a {
+            display: inline-block;
+            width: 100%;
+            margin: .25rem;
+        }
+    }
+}
+
+.dashboardStats {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: .75rem;
+
+    @media (max-width: 1000px) {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    @media (max-width: 644px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.statCard {
+    display: flex;
+    justify-content: space-between;
+
+    @mixin stat-icon($variant) {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 50px;
+        height: 50px;
+        font-size: 1.25rem;
+        color: var(--color-#{$variant});
+        overflow: hidden;
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: var(--color-#{$variant});
+            opacity: .15;
+        }
+    }
+
+    .statIcon {
+        &[data-variant=primary] {
+            @include stat-icon('primary');
+        }
+        &[data-variant=success] {
+            @include stat-icon('success');
+        }
+        &[data-variant=warning] {
+            @include stat-icon('warning');
+        }
+        &[data-variant=danger] {
+            @include stat-icon('danger');
+        }
+    }
+}

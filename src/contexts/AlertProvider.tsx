@@ -19,7 +19,7 @@ const AlertProvider = ({ children }: AlertProviderProps) => {
     const { state } = useLocation();
     const alertWrapperRef = createRef<any>();
 
-    const setAlert = (message: string, type: string = 'dark') => {
+    const setAlert = (message: string, type: string = 'default') => {
         const id = uuid();
         setAlerts(prevAlerts => [{ id, message, type}, ...prevAlerts]);
     }
